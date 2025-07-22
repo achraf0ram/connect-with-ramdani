@@ -1,12 +1,27 @@
-import { Mail, MessageCircle, Github, Linkedin, Code, MapPin } from "lucide-react";
+import { Mail, MessageCircle, Github, Linkedin, Code, MapPin, Calendar } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import profileAvatar from "@/assets/profile-avatar.jpg";
+import achrafProfile from "@/assets/achraf-profile.jpg";
 
 const skills = [
-  "React", "TypeScript", "Node.js", "Python", "JavaScript", "MongoDB", 
-  "Express.js", "Tailwind CSS", "Next.js", "Git", "Docker", "AWS"
+  "React", "Laravel", "JavaScript", "HTML/CSS", "Bootstrap", "Tailwind CSS",
+  "MySQL", "MongoDB", "Git/GitHub", "UML/Merise", "Python", "Visual Studio Code"
+];
+
+const experiences = [
+  {
+    title: "Stagiaire en Développement",
+    company: "Institut Privé Marocain de Gestion",
+    period: "Avril - Mai 2024",
+    description: "Gestion des bases de données, correction des bugs et amélioration des performances"
+  },
+  {
+    title: "Commercial",
+    company: "Magasin",
+    period: "2022 - 2025",
+    description: "Service client et conseil produits"
+  }
 ];
 
 export const ProfileCard = () => {
@@ -27,8 +42,8 @@ export const ProfileCard = () => {
           <div className="p-8 text-center">
             <div className="relative mx-auto w-32 h-32 mb-6">
               <img
-                src={profileAvatar}
-                alt="Ramdani - Développeur"
+                src={achrafProfile}
+                alt="Achraf Ramdani - Développeur Full Stack"
                 className="w-full h-full rounded-full object-cover border-4 border-primary/20 shadow-lg"
               />
               <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
@@ -36,17 +51,23 @@ export const ProfileCard = () => {
               </div>
             </div>
             
-            <h1 className="text-4xl font-bold text-foreground mb-2">Ramdani</h1>
+            <h1 className="text-4xl font-bold text-foreground mb-2">Achraf Ramdani</h1>
             <p className="text-xl text-primary font-semibold mb-2">Développeur Full Stack</p>
             
-            <div className="flex items-center justify-center gap-2 text-muted-foreground mb-6">
-              <MapPin className="w-4 h-4" />
-              <span>Maroc</span>
+            <div className="flex items-center justify-center gap-4 text-muted-foreground mb-4">
+              <div className="flex items-center gap-1">
+                <MapPin className="w-4 h-4" />
+                <span>Casablanca, Maroc</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Calendar className="w-4 h-4" />
+                <span>23 ans</span>
+              </div>
             </div>
             
-            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Passionné par le développement web moderne, je crée des applications innovantes 
-              avec les dernières technologies. Spécialisé en React, Node.js et solutions cloud.
+            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-6">
+              Développeur passionné par la programmation, spécialisé dans l'univers dynamique du développement 
+              web, les technologies backend et frontend. Diplômé en Développement Digital avec une approche agile.
             </p>
           </div>
         </Card>
@@ -72,11 +93,31 @@ export const ProfileCard = () => {
           </div>
         </Card>
 
+        {/* Experience Section */}
+        <Card className="bg-gradient-card backdrop-blur-sm border-0 shadow-card">
+          <div className="p-6">
+            <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+              <Calendar className="w-6 h-6 text-primary" />
+              Expériences Professionnelles
+            </h2>
+            <div className="space-y-4">
+              {experiences.map((exp, index) => (
+                <div key={index} className="border-l-4 border-primary pl-4">
+                  <h3 className="font-semibold text-foreground">{exp.title}</h3>
+                  <p className="text-primary font-medium">{exp.company}</p>
+                  <p className="text-sm text-muted-foreground mb-2">{exp.period}</p>
+                  <p className="text-muted-foreground text-sm">{exp.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
+
         {/* Contact Section */}
         <Card className="bg-gradient-card backdrop-blur-sm border-0 shadow-card">
           <div className="p-6">
             <h2 className="text-2xl font-bold text-foreground mb-6 text-center">
-              Comment souhaitez-vous me contacter ?
+              Contactez Achraf Ramdani
             </h2>
             
             <div className="grid md:grid-cols-2 gap-4">
@@ -121,7 +162,7 @@ export const ProfileCard = () => {
 
         {/* Footer */}
         <div className="text-center text-muted-foreground">
-          <p>© 2025 Ramdani - Développeur Full Stack</p>
+          <p>© 2025 Achraf Ramdani - Développeur Full Stack | Casablanca, Maroc</p>
         </div>
       </div>
     </div>
