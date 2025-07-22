@@ -1,7 +1,7 @@
-import { ProfileCard } from "@/components/ProfileCard";
+import ModernProfileCard from "@/components/ModernProfileCard";
 
 const Index = () => {
-  return <ProfileCard />;
+  return <ModernProfileCard />;
 };
 
 export default Index;
