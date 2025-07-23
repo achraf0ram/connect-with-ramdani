@@ -319,15 +319,26 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                       <div className="pc-status">{status}</div>
                     </div>
                   </div>
-                  <button
-                    className="pc-contact-btn"
-                    onClick={handleContactClick}
-                    style={{ pointerEvents: "auto" }}
-                    type="button"
-                    aria-label={`Contact ${name}`}
-                  >
-                    {contactText}
-                  </button>
+                  <div className="pc-contact-buttons">
+                    <button
+                      className="pc-contact-btn whatsapp"
+                      onClick={() => window.open("https://wa.me/212620740008?text=Salut, je veux poser une question", "_blank")}
+                      style={{ pointerEvents: "auto" }}
+                      type="button"
+                      aria-label="Contact via WhatsApp"
+                    >
+                      WhatsApp
+                    </button>
+                    <button
+                      className="pc-contact-btn email"
+                      onClick={() => window.open("mailto:20ramdani02@gmail.com?subject=Question&body=Bonjour", "_blank")}
+                      style={{ pointerEvents: "auto" }}
+                      type="button"
+                      aria-label="Contact via Email"
+                    >
+                      Email
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

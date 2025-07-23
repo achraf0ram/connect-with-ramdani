@@ -294,24 +294,46 @@ All colors MUST be HSL.
   font-weight: 500;
 }
 
-.pc-contact-btn {
-  background: rgba(255, 255, 255, 0.9);
-  color: #1e293b;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(10px);
-}
-
-.pc-contact-btn:hover {
-  background: white;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+  .pc-contact-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .pc-contact-btn {
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    flex: 1;
+    min-width: 70px;
+  }
+  
+  .pc-contact-btn.whatsapp {
+    background: #25D366;
+    color: white;
+  }
+  
+  .pc-contact-btn.whatsapp:hover {
+    background: #1ebe5d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  }
+  
+  .pc-contact-btn.email {
+    background: #4285F4;
+    color: white;
+  }
+  
+  .pc-contact-btn.email:hover {
+    background: #2f6fe3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+  }
 
 @media (max-width: 500px) {
   .pc-card-wrapper {
