@@ -25,16 +25,34 @@
 
     body {
       min-height: 100vh;
-      background: #0a0f1a;
+      background: #101726;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       padding: 1rem;
+      /* إضافة خلفية كودات */
+      position: relative;
+      overflow: hidden;
     }
-
+    .code-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.13;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      font-size: 1.1rem;
+      color: #fff;
+      white-space: pre;
+      line-height: 1.7;
+      user-select: none;
+      background: none;
+    }
     .pc-card-wrapper {
+      position: relative;
+      z-index: 1;
       width: 350px;
       height: 500px;
       perspective: 1000px;
@@ -354,6 +372,80 @@
   </style>
 </head>
 <body>
+  <div class="code-bg">
+    /* === Personal Info === */
+    const profile = {
+      name: "Achraf Ramdani",
+      age: 24,
+      nationality: "Marocaine",
+      languages: ["Français"],
+      email: "20ramdani02@gmail.com",
+      phone: "0620740008",
+      address: "Casablanca, Deroua",
+      permis: ["A", "B"],
+      title: "Développeur Full-stack",
+      about: "Développeur passionné par la programmation, dynamique, backend & frontend."
+    };
+
+    /* === Compétences Techniques === */
+    const skills = [
+      "MySQL", "MongoDB",
+      "HTML", "CSS", "Bootstrap", "Tailwind",
+      "ReactJS", "Laravel",
+      "Github", "VS Code", "PyCharm",
+      "Agile"
+    ];
+
+    /* === Compétences Personnelles === */
+    const softSkills = [
+      "Ecoute Active", "Travail en équipe", "Esprit Critique",
+      "Dynamique", "Communication", "Auto-formation"
+    ];
+
+    /* === Formations === */
+    const education = [
+      {
+        diploma: "Technicien Spécialisé Développement Digital",
+        option: "Full Stack",
+        school: "CMF LALLA AICHA",
+        city: "Sidi Maarouf, Casablanca",
+        years: "2022-2024"
+      },
+      {
+        diploma: "Université Hassan II - Physique & Chimie",
+        city: "Ain chock, Casablanca",
+        years: "2021-2022"
+      },
+      {
+        diploma: "Baccalauréat Scientifique",
+        option: "Sciences Physiques et Chimiques",
+        school: "Lycée Tarek Ibn Ziad",
+        city: "Deroua, Casablanca",
+        years: "2020-2021"
+      }
+    ];
+
+    /* === Expériences Professionnelles === */
+    const experiences = [
+      {
+        poste: "Magasin (Commercial)",
+        years: "2022-2025",
+        missions: [
+          "Accueil clients", "Conseil produits", "Gestion stocks",
+          "Propositions d'amélioration"
+        ]
+      },
+      {
+        poste: "Stagiaire Développement",
+        company: "Institut Privé Marocain de Gestion de l'Information et Sécurité Electronique",
+        period: "8 Avril 2024 - 5 Mai 2024",
+        missions: [
+          "Gestion BDD", "Correction bugs", "Optimisation performance",
+          "Sécurité systèmes", "Documentation", "Veille technologique"
+        ]
+      }
+    ];
+  </div>
   <div class="pc-card-wrapper" id="wrap">
     <section class="pc-card" id="card">
       <div class="pc-inside">
@@ -361,10 +453,7 @@
         <div class="pc-glare"></div>
         
         <div class="pc-avatar-content">
-          <img class="avatar" src="data:image/jpeg;base64,
-9TjwR5Y4VsssWxoRwUmUNFFCRWUXhPFjYqfk6nRfpDhM7JVyPg4f3PFbpeCOWIWHv4ON6V4tDw/G5c4vmkc8Gh0WpPwj4z4zskp6kT5BKMG
-... (تم اختصار base64 هنا، سيتم وضعها كاملة في الملف) ...
-" alt="Achraf Ramdani" loading="lazy" />
+          <img class="avatar" src="achraf-profile copy.jpg" alt="Profile" loading="lazy" style="filter: grayscale(1);" />
         </div>
         
         <div class="pc-content">
@@ -376,10 +465,7 @@
           <div class="pc-user-info">
             <div class="pc-user-details">
               <div class="pc-mini-avatar">
-                <img src="data:image/jpeg;base64,
-9TjwR5Y4VsssWxoRwUmUNFFCRWUXhPFjYqfk6nRfpDhM7JVyPg4f3PFbpeCOWIWHv4ON6V4tDw/G5c4vmkc8Gh0WpPwj4z4zskp6kT5BKMG
-... (نفس base64 للصورة) ...
-" alt="avatar" loading="lazy" />
+                <img src="achraf-profile copy.jpg" alt="Profile" loading="lazy" style="width: 40px; height: 40px; border-radius: 50%; filter: grayscale(1);" />
               </div>
               <div class="pc-user-text">
                 <div class="pc-handle">@ram_achraf</div>
@@ -429,6 +515,9 @@
 
     // Animation state
     let rafId = null;
+    let idleRafId = null;
+    let isPointerOver = false;
+    let idleAngle = 0;
 
     function updateCardTransform(offsetX, offsetY) {
       const width = card.clientWidth;
@@ -485,9 +574,34 @@
       }
     }
 
+    // --- Idle gentle animation ---
+    function idleTiltLoop() {
+      if (isPointerOver) return;
+      idleAngle += 0.015; // سرعة الحركة
+      // زاويتان متذبذبتان
+      const idleX = 50 + Math.sin(idleAngle) * 13; // من 37 إلى 63 تقريبًا
+      const idleY = 50 + Math.cos(idleAngle * 0.8) * 10; // من 40 إلى 60 تقريبًا
+      updateCardTransform(
+        (idleX / 100) * card.clientWidth,
+        (idleY / 100) * card.clientHeight
+      );
+      idleRafId = requestAnimationFrame(idleTiltLoop);
+    }
+
+    function startIdleTilt() {
+      if (idleRafId) cancelAnimationFrame(idleRafId);
+      idleRafId = requestAnimationFrame(idleTiltLoop);
+    }
+    function stopIdleTilt() {
+      if (idleRafId) cancelAnimationFrame(idleRafId);
+      idleRafId = null;
+    }
+
     // Event handlers
     card.addEventListener('pointerenter', function() {
       cancelAnimation();
+      stopIdleTilt();
+      isPointerOver = true;
       wrap.classList.add('active');
       card.classList.add('active');
     });
@@ -505,6 +619,8 @@
       );
       wrap.classList.remove('active');
       card.classList.remove('active');
+      isPointerOver = false;
+      setTimeout(startIdleTilt, ANIMATION_CONFIG.SMOOTH_DURATION + 100);
     });
 
     // Contact buttons
@@ -527,6 +643,7 @@
         initialX,
         initialY
       );
+      setTimeout(startIdleTilt, ANIMATION_CONFIG.INITIAL_DURATION + 200);
     });
 
     // Device orientation for mobile tilt (optional)
