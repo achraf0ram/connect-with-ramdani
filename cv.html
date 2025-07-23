@@ -5,39 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Achraf Ramdani - Développeur Full Stack</title>
   <style>
+    :root {
+      --pointer-x: 50%;
+      --pointer-y: 50%;
+      --pointer-from-center: 0;
+      --pointer-from-top: 0.5;
+      --pointer-from-left: 0.5;
+      --card-opacity: 0;
+      --rotate-x: 0deg;
+      --rotate-y: 0deg;
+      --background-x: 50%;
+      --background-y: 50%;
+      --card-radius: 30px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       min-height: 100vh;
-      background: #101726;
+      background: #0a0f1a;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0;
-      font-family: 'Inter', Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 1rem;
     }
+
     .pc-card-wrapper {
       width: 350px;
       height: 500px;
       perspective: 1000px;
       transition: transform 0.6s ease-out;
     }
+
+    .pc-card-wrapper.active {
+      --card-opacity: 1;
+    }
+
     .pc-card {
       position: relative;
       width: 100%;
       height: 100%;
-      border-radius: 24px;
-      background: radial-gradient(farthest-side circle at var(--pointer-x,50%) var(--pointer-y,50%), hsla(196, 100%, 50%, 0.7) 4%, hsla(196, 75%, 60%, 0.5) 10%, hsla(196, 50%, 70%, 0.3) 50%, hsla(196, 0%, 60%, 0) 100%), radial-gradient(35% 52% at 55% 20%, #00ffaac4 0%, #073aff00 100%), radial-gradient(100% 100% at 50% 50%, #00c1ffff 1%, #073aff00 76%), conic-gradient(from 124deg at 50% 50%, #00c1ffff 0%, #07c6ffff 40%, #07c6ffff 60%, #00c1ffff 100%);
+      border-radius: var(--card-radius);
+      background: radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y), hsla(120, 80%, 40%, var(--card-opacity)) 4%, hsla(120, 60%, 50%, calc(var(--card-opacity) * 0.75)) 10%, hsla(200, 70%, 60%, calc(var(--card-opacity) * 0.5)) 50%, hsla(240, 50%, 40%, 0) 100%), 
+                  radial-gradient(35% 52% at 55% 20%, #00ff88c4 0%, #1a1a2e00 100%), 
+                  radial-gradient(100% 100% at 50% 50%, #00c9ffff 1%, #16213e00 76%), 
+                  conic-gradient(from 124deg at 50% 50%, #00ff88ff 0%, #00c9ffff 40%, #0066ffff 60%, #00ff88ff 100%);
       transform-style: preserve-3d;
-      transform: rotateX(var(--rotate-x,0deg)) rotateY(var(--rotate-y,0deg));
+      transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
       transition: transform 0.2s ease-out;
       overflow: hidden;
       cursor: pointer;
     }
+
+    .pc-card.active {
+      transition: transform 0.1s ease-out;
+    }
+
     .pc-inside {
       position: relative;
       width: 100%;
       height: 100%;
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
-      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(10, 20, 30, 0.95) 0%, rgba(20, 30, 45, 0.9) 100%), 
+                  url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300ff88' fill-opacity='0.05'%3E%3Cpath d='M10 20h40v20H10V20zm20-10h20v20H30V10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      border-radius: calc(var(--card-radius) - 2px);
       margin: 2px;
       display: flex;
       flex-direction: column;
@@ -46,6 +80,29 @@
       padding: 2rem;
       overflow: hidden;
     }
+
+    .pc-shine {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      opacity: var(--pointer-from-center);
+      transition: opacity 0.2s ease;
+    }
+
+    .pc-glare {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+      transform: translateX(calc(var(--pointer-x) - 50%)) translateY(calc(var(--pointer-y) - 50%));
+      opacity: var(--pointer-from-center);
+    }
+
     .pc-avatar-content {
       flex: 1;
       display: flex;
@@ -55,6 +112,7 @@
       position: relative;
       z-index: 2;
     }
+
     .avatar {
       width: 160px;
       height: 160px;
@@ -63,16 +121,20 @@
       border: 3px solid rgba(255, 255, 255, 0.2);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       margin-bottom: 1.5rem;
+      filter: grayscale(100%);
     }
+
     .pc-content {
       position: relative;
       z-index: 2;
       width: 100%;
     }
+
     .pc-details {
       text-align: center;
       margin-bottom: 2rem;
     }
+
     .pc-details h3 {
       font-size: 2rem;
       font-weight: 700;
@@ -80,11 +142,13 @@
       margin-bottom: 0.5rem;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
+
     .pc-details p {
       font-size: 1.1rem;
       color: rgba(255, 255, 255, 0.7);
       font-weight: 400;
     }
+
     .pc-user-info {
       width: 100%;
       background: rgba(255, 255, 255, 0.1);
@@ -96,11 +160,13 @@
       justify-content: space-between;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
+
     .pc-user-details {
       display: flex;
       align-items: center;
       gap: 0.75rem;
     }
+
     .pc-mini-avatar {
       width: 40px;
       height: 40px;
@@ -108,80 +174,178 @@
       overflow: hidden;
       border: 2px solid rgba(255, 255, 255, 0.2);
     }
+
     .pc-mini-avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      filter: grayscale(100%);
     }
+
     .pc-user-text {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
+
     .pc-handle {
       color: white;
       font-size: 0.9rem;
       font-weight: 600;
     }
+
     .pc-status {
       color: #10B981;
       font-size: 0.8rem;
       font-weight: 500;
     }
+
+    .pc-contact-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
     .pc-contact-btn {
-      background: rgba(255, 255, 255, 0.9);
-      color: #1e293b;
       border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       cursor: pointer;
       transition: all 0.2s ease;
       backdrop-filter: blur(10px);
+      flex: 1;
+      min-width: 70px;
     }
-    .pc-contact-btn:hover {
-      background: white;
+
+    .pc-contact-btn.whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .pc-contact-btn.whatsapp:hover {
+      background: #1ebe5d;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
     }
-    @media (max-width: 500px) {
+
+    .pc-contact-btn.email {
+      background: #4285F4;
+      color: white;
+    }
+
+    .pc-contact-btn.email:hover {
+      background: #2f6fe3;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .pc-card-wrapper {
+        width: 95vw;
+        height: auto;
+        min-height: 450px;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      
+      .pc-card {
+        min-height: 450px;
+        height: auto;
+      }
+      
+      .pc-inside {
+        padding: 1.5rem 1rem;
+      }
+      
+      .avatar {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 1rem;
+      }
+      
+      .pc-details h3 {
+        font-size: 1.5rem;
+      }
+      
+      .pc-details p {
+        font-size: 1rem;
+      }
+      
+      .pc-user-info {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+      }
+      
+      .pc-contact-buttons {
+        width: 100%;
+        gap: 0.5rem;
+      }
+      
+      .pc-contact-btn {
+        font-size: 0.9rem;
+        padding: 0.75rem 0.5rem;
+        min-width: auto;
+      }
+      
+      .pc-user-details {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
       .pc-card-wrapper {
         width: 98vw;
         height: auto;
         min-height: 420px;
-        max-width: 99vw;
+        max-width: 98vw;
         padding: 0;
       }
+      
       .pc-card {
         min-height: 420px;
         height: auto;
         padding: 0;
       }
+      
       .pc-inside {
         padding: 1rem;
       }
+      
       .avatar {
         width: 100px;
         height: 100px;
         margin-bottom: 1rem;
       }
+      
       .pc-details h3 {
         font-size: 1.2rem;
       }
+      
       .pc-details p {
         font-size: 0.95rem;
       }
+      
       .pc-user-info {
         flex-direction: column;
         gap: 0.5rem;
         padding: 0.7rem;
       }
-      .pc-contact-btn {
+      
+      .pc-contact-buttons {
         width: 100%;
-        font-size: 0.95rem;
-        padding: 0.6rem 0;
+        gap: 0.4rem;
       }
+      
+      .pc-contact-btn {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.5rem;
+        min-width: auto;
+      }
+      
       .pc-user-details {
         width: 100%;
         justify-content: flex-start;
@@ -193,17 +357,22 @@
   <div class="pc-card-wrapper" id="wrap">
     <section class="pc-card" id="card">
       <div class="pc-inside">
+        <div class="pc-shine"></div>
+        <div class="pc-glare"></div>
+        
         <div class="pc-avatar-content">
           <img class="avatar" src="data:image/jpeg;base64,
 9TjwR5Y4VsssWxoRwUmUNFFCRWUXhPFjYqfk6nRfpDhM7JVyPg4f3PFbpeCOWIWHv4ON6V4tDw/G5c4vmkc8Gh0WpPwj4z4zskp6kT5BKMG
 ... (تم اختصار base64 هنا، سيتم وضعها كاملة في الملف) ...
 " alt="Achraf Ramdani" loading="lazy" />
         </div>
+        
         <div class="pc-content">
           <div class="pc-details">
             <h3>Achraf Ramdani</h3>
             <p>Développeur Full Stack</p>
           </div>
+          
           <div class="pc-user-info">
             <div class="pc-user-details">
               <div class="pc-mini-avatar">
@@ -213,29 +382,54 @@
 " alt="avatar" loading="lazy" />
               </div>
               <div class="pc-user-text">
-                <div class="pc-handle">@achraf_dev</div>
+                <div class="pc-handle">@ram_achraf</div>
                 <div class="pc-status">En ligne</div>
               </div>
             </div>
-            <button class="pc-contact-btn" id="contactBtn" type="button">Contactez-moi</button>
+            
+            <div class="pc-contact-buttons">
+              <button class="pc-contact-btn whatsapp" id="whatsappBtn" type="button">WhatsApp</button>
+              <button class="pc-contact-btn email" id="emailBtn" type="button">Email</button>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </div>
   <script>
-    // Tilt effect (simplified for vanilla JS)
+    // CSS Variables
     const wrap = document.getElementById('wrap');
     const card = document.getElementById('card');
+    
+    // Animation configuration
+    const ANIMATION_CONFIG = {
+      SMOOTH_DURATION: 600,
+      INITIAL_DURATION: 1500,
+      INITIAL_X_OFFSET: 70,
+      INITIAL_Y_OFFSET: 60,
+      DEVICE_BETA_OFFSET: 20,
+    };
+
+    // Utility functions
     function clamp(value, min = 0, max = 100) {
       return Math.min(Math.max(value, min), max);
     }
+
     function round(value, precision = 3) {
       return parseFloat(value.toFixed(precision));
     }
+
     function adjust(value, fromMin, fromMax, toMin, toMax) {
       return round(toMin + ((toMax - toMin) * (value - fromMin)) / (fromMax - fromMin));
     }
+
+    function easeInOutCubic(x) {
+      return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+    }
+
+    // Animation state
+    let rafId = null;
+
     function updateCardTransform(offsetX, offsetY) {
       const width = card.clientWidth;
       const height = card.clientHeight;
@@ -243,28 +437,124 @@
       const percentY = clamp((100 / height) * offsetY);
       const centerX = percentX - 50;
       const centerY = percentY - 50;
-      card.style.setProperty('--pointer-x', percentX + '%');
-      card.style.setProperty('--pointer-y', percentY + '%');
-      card.style.setProperty('--background-x', adjust(percentX, 0, 100, 35, 65) + '%');
-      card.style.setProperty('--background-y', adjust(percentY, 0, 100, 35, 65) + '%');
-      card.style.setProperty('--pointer-from-center', clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1));
-      card.style.setProperty('--pointer-from-top', percentY / 100);
-      card.style.setProperty('--pointer-from-left', percentX / 100);
-      card.style.setProperty('--rotate-x', round(-(centerX / 5)) + 'deg');
-      card.style.setProperty('--rotate-y', round(centerY / 4) + 'deg');
+
+      const properties = {
+        '--pointer-x': percentX + '%',
+        '--pointer-y': percentY + '%',
+        '--background-x': adjust(percentX, 0, 100, 35, 65) + '%',
+        '--background-y': adjust(percentY, 0, 100, 35, 65) + '%',
+        '--pointer-from-center': clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1),
+        '--pointer-from-top': percentY / 100,
+        '--pointer-from-left': percentX / 100,
+        '--rotate-x': round(-(centerX / 5)) + 'deg',
+        '--rotate-y': round(centerY / 4) + 'deg',
+      };
+
+      Object.entries(properties).forEach(([property, value]) => {
+        wrap.style.setProperty(property, value);
+      });
     }
+
+    function createSmoothAnimation(duration, startX, startY) {
+      const startTime = performance.now();
+      const targetX = wrap.clientWidth / 2;
+      const targetY = wrap.clientHeight / 2;
+
+      function animationLoop(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = clamp(elapsed / duration);
+        const easedProgress = easeInOutCubic(progress);
+
+        const currentX = adjust(easedProgress, 0, 1, startX, targetX);
+        const currentY = adjust(easedProgress, 0, 1, startY, targetY);
+
+        updateCardTransform(currentX, currentY);
+
+        if (progress < 1) {
+          rafId = requestAnimationFrame(animationLoop);
+        }
+      }
+
+      rafId = requestAnimationFrame(animationLoop);
+    }
+
+    function cancelAnimation() {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    }
+
+    // Event handlers
+    card.addEventListener('pointerenter', function() {
+      cancelAnimation();
+      wrap.classList.add('active');
+      card.classList.add('active');
+    });
+
     card.addEventListener('pointermove', function(e) {
       const rect = card.getBoundingClientRect();
       updateCardTransform(e.clientX - rect.left, e.clientY - rect.top);
     });
-    card.addEventListener('pointerleave', function() {
-      card.style.setProperty('--rotate-x', '0deg');
-      card.style.setProperty('--rotate-y', '0deg');
+
+    card.addEventListener('pointerleave', function(e) {
+      createSmoothAnimation(
+        ANIMATION_CONFIG.SMOOTH_DURATION,
+        e.offsetX,
+        e.offsetY
+      );
+      wrap.classList.remove('active');
+      card.classList.remove('active');
     });
-    // Contact button
-    document.getElementById('contactBtn').onclick = function() {
+
+    // Contact buttons
+    document.getElementById('whatsappBtn').onclick = function() {
       window.open('https://wa.me/212620740008?text=Salut, je veux poser une question', '_blank');
     };
+
+    document.getElementById('emailBtn').onclick = function() {
+      window.open('mailto:20ramdani02@gmail.com?subject=Question&body=Bonjour', '_blank');
+    };
+
+    // Initial animation
+    window.addEventListener('load', function() {
+      const initialX = wrap.clientWidth - ANIMATION_CONFIG.INITIAL_X_OFFSET;
+      const initialY = ANIMATION_CONFIG.INITIAL_Y_OFFSET;
+
+      updateCardTransform(initialX, initialY);
+      createSmoothAnimation(
+        ANIMATION_CONFIG.INITIAL_DURATION,
+        initialX,
+        initialY
+      );
+    });
+
+    // Device orientation for mobile tilt (optional)
+    function handleDeviceOrientation(event) {
+      const { beta, gamma } = event;
+      if (!beta || !gamma) return;
+
+      updateCardTransform(
+        card.clientHeight / 2 + gamma * 5,
+        card.clientWidth / 2 + (beta - ANIMATION_CONFIG.DEVICE_BETA_OFFSET) * 5
+      );
+    }
+
+    // Enable mobile tilt on HTTPS
+    card.addEventListener('click', function() {
+      if (location.protocol !== 'https:') return;
+      if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission()
+          .then(state => {
+            if (state === 'granted') {
+              window.addEventListener('deviceorientation', handleDeviceOrientation);
+            }
+          })
+          .catch(err => console.error(err));
+      } else {
+        window.addEventListener('deviceorientation', handleDeviceOrientation);
+      }
+    });
   </script>
 </body>
 </html> 
