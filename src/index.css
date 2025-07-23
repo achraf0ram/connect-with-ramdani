@@ -338,43 +338,111 @@ All colors MUST be HSL.
     box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
   }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
+  .pc-card-wrapper {
+    width: 95vw;
+    height: auto;
+    min-height: 450px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .pc-card {
+    min-height: 450px;
+    height: auto;
+  }
+  
+  .pc-inside {
+    padding: 1.5rem 1rem;
+  }
+  
+  .pc-avatar-content .avatar {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
+  }
+  
+  .pc-details h3 {
+    font-size: 1.5rem;
+  }
+  
+  .pc-details p {
+    font-size: 1rem;
+  }
+  
+  .pc-user-info {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+  
+  .pc-contact-buttons {
+    width: 100%;
+    gap: 0.5rem;
+  }
+  
+  .pc-contact-btn {
+    font-size: 0.9rem;
+    padding: 0.75rem 0.5rem;
+    min-width: auto;
+  }
+  
+  .pc-user-details {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
   .pc-card-wrapper {
     width: 98vw;
     height: auto;
     min-height: 420px;
-    max-width: 99vw;
+    max-width: 98vw;
     padding: 0;
   }
+  
   .pc-card {
     min-height: 420px;
     height: auto;
     padding: 0;
   }
+  
   .pc-inside {
     padding: 1rem;
   }
+  
   .pc-avatar-content .avatar {
     width: 100px;
     height: 100px;
     margin-bottom: 1rem;
   }
+  
   .pc-details h3 {
     font-size: 1.2rem;
   }
+  
   .pc-details p {
     font-size: 0.95rem;
   }
+  
   .pc-user-info {
     flex-direction: column;
     gap: 0.5rem;
     padding: 0.7rem;
   }
-  .pc-contact-btn {
+  
+  .pc-contact-buttons {
     width: 100%;
-    font-size: 0.95rem;
-    padding: 0.6rem 0;
+    gap: 0.4rem;
   }
+  
+  .pc-contact-btn {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.5rem;
+    min-width: auto;
+  }
+  
   .pc-user-details {
     width: 100%;
     justify-content: flex-start;
