@@ -312,3 +312,46 @@ All colors MUST be HSL.
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+@media (max-width: 500px) {
+  .pc-card-wrapper {
+    width: 98vw;
+    height: auto;
+    min-height: 420px;
+    max-width: 99vw;
+    padding: 0;
+  }
+  .pc-card {
+    min-height: 420px;
+    height: auto;
+    padding: 0;
+  }
+  .pc-inside {
+    padding: 1rem;
+  }
+  .pc-avatar-content .avatar {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1rem;
+  }
+  .pc-details h3 {
+    font-size: 1.2rem;
+  }
+  .pc-details p {
+    font-size: 0.95rem;
+  }
+  .pc-user-info {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.7rem;
+  }
+  .pc-contact-btn {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0.6rem 0;
+  }
+  .pc-user-details {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
