@@ -24,10 +24,8 @@
     }
 
     body {
-      min-height: 100vh;
+      min-height: 200vh; /* جعل الصفحة أطول للسماح بالتمرير */
       background: #101726;
-      display: flex;
-      flex-direction: column;
       margin: 0;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       padding: 0;
@@ -36,7 +34,7 @@
       overflow-x: hidden;
     }
     .code-bg {
-      position: fixed;
+      position: absolute;
       inset: 0;
       z-index: 0;
       pointer-events: none;
@@ -48,10 +46,15 @@
       line-height: 1.7;
       user-select: none;
       background: none;
+      height: 200vh; /* جعل الخلفية أطول */
+      overflow: visible;
     }
     .pc-card-wrapper {
-      position: relative;
-      z-index: 1;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
       width: 350px;
       height: 500px;
       perspective: 1000px;
@@ -371,11 +374,15 @@
 
     /* Social Media Ticker Styles */
     .social-ticker-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
       height: 45px;
       background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(30, 30, 60, 0.8));
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       overflow: hidden;
-      position: relative;
       backdrop-filter: blur(10px);
     }
 
@@ -442,20 +449,125 @@
       }
     }
 
-    .main-content {
-      flex: 1;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-end;
-      padding: 2rem;
-      padding-top: 3rem;
+    @media (max-width: 768px) {
+      .pc-card-wrapper {
+        width: 95vw;
+        height: auto;
+        min-height: 450px;
+        max-width: 400px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      
+      .pc-card {
+        min-height: 450px;
+        height: auto;
+      }
+      
+      .pc-inside {
+        padding: 1.5rem 1rem;
+      }
+      
+      .avatar {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 1rem;
+      }
+      
+      .pc-details h3 {
+        font-size: 1.5rem;
+      }
+      
+      .pc-details p {
+        font-size: 1rem;
+      }
+      
+      .pc-user-info {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+      }
+      
+      .pc-contact-buttons {
+        width: 100%;
+        gap: 0.5rem;
+      }
+      
+      .pc-contact-btn {
+        font-size: 0.9rem;
+        padding: 0.75rem 0.5rem;
+        min-width: auto;
+      }
+      
+      .pc-user-details {
+        width: 100%;
+        justify-content: flex-start;
+      }
     }
 
-    @media (max-width: 768px) {
-      .main-content {
-        align-items: center;
-        justify-content: center;
+    @media (max-width: 480px) {
+      .pc-card-wrapper {
+        width: 98vw;
+        height: auto;
+        min-height: 420px;
+        max-width: 98vw;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      
+      .pc-card {
+        min-height: 420px;
+        height: auto;
+      }
+      
+      .pc-inside {
         padding: 1rem;
+      }
+      
+      .avatar {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 1rem;
+      }
+      
+      .pc-details h3 {
+        font-size: 1.2rem;
+      }
+      
+      .pc-details p {
+        font-size: 0.95rem;
+      }
+      
+      .pc-user-info {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.7rem;
+      }
+      
+      .pc-contact-buttons {
+        width: 100%;
+        gap: 0.4rem;
+      }
+      
+      .pc-contact-btn {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.5rem;
+        min-width: auto;
+      }
+      
+      .pc-user-details {
+        width: 100%;
+        justify-content: flex-start;
+      }
+      
+      .social-ticker-container {
+        height: 35px;
+      }
+      
+      .social-btn span {
+        font-size: 0.7rem;
       }
     }
   </style>
@@ -667,8 +779,7 @@
     </div>
   </div>
   
-  <div class="main-content">
-    <div class="pc-card-wrapper" id="wrap">
+  <div class="pc-card-wrapper" id="wrap">
     <section class="pc-card" id="card">
       <div class="pc-inside">
         <div class="pc-shine"></div>
@@ -703,7 +814,6 @@
         </div>
       </div>
     </section>
-    </div>
   </div>
   <script>
     // CSS Variables
