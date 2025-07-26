@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import achrafProfile from "@/assets/achraf-profile.jpg";
-import { Github, Linkedin, Instagram, Facebook, MessageCircle } from "lucide-react";
+import { Github, Linkedin, Instagram, Facebook, Play } from "lucide-react";
 
 interface ProfileCardProps {
   avatarUrl?: string;
@@ -283,7 +283,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     { icon: Linkedin, url: "https://www.linkedin.com/in/ramdani-achraf/", label: "LinkedIn" },
     { icon: Instagram, url: "https://www.instagram.com/ram_achraf?igsh=MWp3dHNtbGJpMTdpdw%3D%3D&utm_source=qr", label: "Instagram" },
     { icon: Facebook, url: "https://www.facebook.com/share/1YUqUp3n5M/?mibextid=wwXIfr", label: "Facebook" },
-    { icon: MessageCircle, url: "https://www.tiktok.com/@ram_achraf?_t=ZM-8yLwmzO8Ep6&_r=1", label: "TikTok" },
+    { icon: Play, url: "https://www.tiktok.com/@ram_achraf?_t=ZM-8yLwmzO8Ep6&_r=1", label: "TikTok" },
   ];
 
   return (
