@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import achrafProfile from "@/assets/achraf-profile.jpg";
+import { Github, Linkedin, Instagram, Facebook, MessageCircle } from "lucide-react";
 
 interface ProfileCardProps {
   avatarUrl?: string;
@@ -277,9 +278,39 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     }
   }, [onContactClick]);
 
+  const socialLinks = [
+    { icon: Github, url: "https://github.com/achraf0ram/", label: "GitHub" },
+    { icon: Linkedin, url: "https://www.linkedin.com/in/ramdani-achraf/", label: "LinkedIn" },
+    { icon: Instagram, url: "https://www.instagram.com/ram_achraf?igsh=MWp3dHNtbGJpMTdpdw%3D%3D&utm_source=qr", label: "Instagram" },
+    { icon: Facebook, url: "https://www.facebook.com/share/1YUqUp3n5M/?mibextid=wwXIfr", label: "Facebook" },
+    { icon: MessageCircle, url: "https://www.tiktok.com/@ram_achraf?_t=ZM-8yLwmzO8Ep6&_r=1", label: "TikTok" },
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
-      <div ref={wrapRef} className="pc-card-wrapper">
+    <div className="min-h-screen bg-slate-900 flex flex-col">
+      {/* Social Media Ticker */}
+      <div className="social-ticker-container">
+        <div className="social-ticker">
+          {[...Array(3)].map((_, index) => (
+            <div key={index} className="social-ticker-content">
+              {socialLinks.map((link, i) => (
+                <button
+                  key={i}
+                  onClick={() => window.open(link.url, "_blank")}
+                  className="social-btn"
+                  aria-label={link.label}
+                >
+                  <link.icon size={16} />
+                  <span>{link.label}</span>
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div ref={wrapRef} className="pc-card-wrapper">
         <section ref={cardRef} className="pc-card">
           <div className="pc-inside">
             <div className="pc-shine" />
@@ -344,6 +375,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
             </div>
           </div>
         </section>
+        </div>
       </div>
     </div>
   );
