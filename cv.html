@@ -27,14 +27,13 @@
       min-height: 100vh;
       background: #101726;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
       margin: 0;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      padding: 1rem;
+      padding: 0;
       /* إضافة خلفية كودات */
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
     }
     .code-bg {
       position: fixed;
@@ -442,6 +441,23 @@
         font-size: 0.7rem;
       }
     }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 2rem;
+      padding-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -650,8 +666,9 @@
       </div>
     </div>
   </div>
-
-  <div class="pc-card-wrapper" id="wrap">
+  
+  <div class="main-content">
+    <div class="pc-card-wrapper" id="wrap">
     <section class="pc-card" id="card">
       <div class="pc-inside">
         <div class="pc-shine"></div>
@@ -686,6 +703,7 @@
         </div>
       </div>
     </section>
+    </div>
   </div>
   <script>
     // CSS Variables
