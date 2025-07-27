@@ -264,11 +264,11 @@
     /* Mobile First Approach */
     @media screen and (max-width: 768px) {
       .pc-card-wrapper {
-        width: 90vw !important;
+        width: 85vw !important;
         height: auto !important;
-        min-height: 70vh !important;
-        max-height: 85vh !important;
-        max-width: 380px !important;
+        min-height: 65vh !important;
+        max-height: 80vh !important;
+        max-width: 360px !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
@@ -278,61 +278,76 @@
       }
       
       .pc-card {
-        min-height: 70vh !important;
-        max-height: 85vh !important;
+        min-height: 65vh !important;
+        max-height: 80vh !important;
         height: auto !important;
-        overflow: auto !important;
+        overflow: hidden !important;
+        border-radius: 20px !important;
       }
       
       .pc-inside {
-        padding: 1.5rem 1.2rem !important;
-        gap: 1rem !important;
+        padding: 1.8rem 1.4rem !important;
+        gap: 1.2rem !important;
         height: 100% !important;
-        justify-content: space-evenly !important;
+        justify-content: space-between !important;
+        overflow: hidden !important;
       }
       
       .pc-avatar-content {
-        flex: 0.6 !important;
+        flex: 0.65 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
       }
       
       .avatar {
-        width: 120px !important;
-        height: 120px !important;
-        margin-bottom: 1rem !important;
+        width: 110px !important;
+        height: 110px !important;
+        margin-bottom: 1.2rem !important;
       }
       
       .pc-details {
-        margin-bottom: 1rem !important;
+        margin-bottom: 0 !important;
+        text-align: center !important;
       }
       
       .pc-details h3 {
-        font-size: 1.4rem !important;
-        margin-bottom: 0.3rem !important;
+        font-size: 1.5rem !important;
+        margin-bottom: 0.4rem !important;
         line-height: 1.2 !important;
+        font-weight: 700 !important;
       }
       
       .pc-details p {
         font-size: 1rem !important;
         line-height: 1.3 !important;
+        opacity: 0.9 !important;
       }
       
       .pc-user-info {
         flex-direction: column !important;
-        gap: 0.8rem !important;
+        gap: 1rem !important;
         padding: 1rem !important;
-        flex: 0.4 !important;
+        flex: 0.35 !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-radius: 12px !important;
       }
       
       .pc-contact-buttons {
         width: 100% !important;
-        gap: 0.5rem !important;
+        gap: 0.6rem !important;
+        display: flex !important;
+        flex-direction: column !important;
       }
       
       .pc-contact-btn {
-        font-size: 0.85rem !important;
-        padding: 0.7rem 0.8rem !important;
+        font-size: 0.9rem !important;
+        padding: 0.8rem 1rem !important;
         min-width: auto !important;
-        border-radius: 6px !important;
+        border-radius: 8px !important;
+        width: 100% !important;
+        font-weight: 600 !important;
       }
       
       .pc-user-details {
@@ -343,11 +358,11 @@
 
     @media screen and (max-width: 480px) {
       .pc-card-wrapper {
-        width: 95vw !important;
+        width: 90vw !important;
         height: auto !important;
-        min-height: 75vh !important;
-        max-height: 90vh !important;
-        max-width: 340px !important;
+        min-height: 70vh !important;
+        max-height: 85vh !important;
+        max-width: 320px !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
@@ -357,66 +372,76 @@
       }
       
       .pc-card {
-        min-height: 75vh !important;
-        max-height: 90vh !important;
+        min-height: 70vh !important;
+        max-height: 85vh !important;
         height: auto !important;
-        overflow: auto !important;
+        overflow: hidden !important;
+        border-radius: 18px !important;
       }
       
       .pc-inside {
-        padding: 1.2rem 1rem !important;
-        gap: 0.8rem !important;
+        padding: 1.5rem 1.2rem !important;
+        gap: 1rem !important;
         height: 100% !important;
         justify-content: space-between !important;
+        overflow: hidden !important;
       }
       
       .pc-avatar-content {
-        flex: 0.55 !important;
+        flex: 0.6 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
         justify-content: center !important;
       }
       
       .avatar {
         width: 100px !important;
         height: 100px !important;
-        margin-bottom: 0.8rem !important;
+        margin-bottom: 1rem !important;
       }
       
       .pc-details {
-        margin-bottom: 1rem !important;
+        margin-bottom: 0 !important;
         text-align: center !important;
       }
       
       .pc-details h3 {
-        font-size: 1.25rem !important;
+        font-size: 1.3rem !important;
         margin-bottom: 0.3rem !important;
         line-height: 1.1 !important;
+        font-weight: 700 !important;
       }
       
       .pc-details p {
-        font-size: 0.9rem !important;
+        font-size: 0.95rem !important;
         line-height: 1.2 !important;
+        opacity: 0.9 !important;
       }
       
       .pc-user-info {
         flex-direction: column !important;
-        gap: 0.7rem !important;
-        padding: 0.8rem !important;
-        flex: 0.45 !important;
+        gap: 0.8rem !important;
+        padding: 1rem !important;
+        flex: 0.4 !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-radius: 10px !important;
       }
       
       .pc-contact-buttons {
         width: 100% !important;
-        gap: 0.4rem !important;
+        gap: 0.5rem !important;
         flex-direction: column !important;
       }
       
       .pc-contact-btn {
-        font-size: 0.8rem !important;
-        padding: 0.6rem 0.8rem !important;
+        font-size: 0.85rem !important;
+        padding: 0.75rem 1rem !important;
         min-width: auto !important;
-        border-radius: 6px !important;
+        border-radius: 8px !important;
         width: 100% !important;
         text-align: center !important;
+        font-weight: 600 !important;
       }
       
       .pc-user-details {
@@ -425,8 +450,8 @@
       }
       
       .pc-mini-avatar {
-        width: 35px !important;
-        height: 35px !important;
+        width: 32px !important;
+        height: 32px !important;
       }
       
       .pc-handle {
@@ -451,20 +476,25 @@
       }
       
       .social-btn svg {
-        width: 14px !important;
-        height: 14px !important;
+        width: 12px !important;
+        height: 12px !important;
       }
     }
     
     @media screen and (max-width: 390px) {
       .pc-card-wrapper {
-        width: 98vw !important;
-        max-width: 320px !important;
-        min-height: 80vh !important;
+        width: 92vw !important;
+        max-width: 300px !important;
+        min-height: 75vh !important;
       }
       
       .pc-card {
-        min-height: 80vh !important;
+        min-height: 75vh !important;
+        border-radius: 16px !important;
+      }
+      
+      .pc-inside {
+        padding: 1.3rem 1rem !important;
       }
       
       .avatar {
@@ -473,11 +503,11 @@
       }
       
       .pc-details h3 {
-        font-size: 1.1rem !important;
+        font-size: 1.2rem !important;
       }
       
       .pc-details p {
-        font-size: 0.85rem !important;
+        font-size: 0.9rem !important;
       }
     }
     
