@@ -265,10 +265,8 @@
     @media screen and (max-width: 768px) {
       .pc-card-wrapper {
         width: 85vw !important;
-        height: auto !important;
-        min-height: 65vh !important;
-        max-height: 80vh !important;
-        max-width: 360px !important;
+        height: 500px !important;
+        max-width: 350px !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
@@ -278,33 +276,35 @@
       }
       
       .pc-card {
-        min-height: 65vh !important;
-        max-height: 80vh !important;
-        height: auto !important;
+        height: 500px !important;
+        width: 100% !important;
         overflow: hidden !important;
         border-radius: 20px !important;
       }
       
       .pc-inside {
-        padding: 1.8rem 1.4rem !important;
-        gap: 1.2rem !important;
+        padding: 1.5rem 1.2rem !important;
+        gap: 0.8rem !important;
         height: 100% !important;
         justify-content: space-between !important;
         overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
       }
       
       .pc-avatar-content {
-        flex: 0.65 !important;
+        flex: none !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
+        margin-bottom: 1rem !important;
       }
       
       .avatar {
-        width: 110px !important;
-        height: 110px !important;
-        margin-bottom: 1.2rem !important;
+        width: 100px !important;
+        height: 100px !important;
+        margin-bottom: 1rem !important;
       }
       
       .pc-details {
@@ -313,23 +313,23 @@
       }
       
       .pc-details h3 {
-        font-size: 1.5rem !important;
-        margin-bottom: 0.4rem !important;
+        font-size: 1.4rem !important;
+        margin-bottom: 0.3rem !important;
         line-height: 1.2 !important;
         font-weight: 700 !important;
       }
       
       .pc-details p {
-        font-size: 1rem !important;
+        font-size: 0.95rem !important;
         line-height: 1.3 !important;
         opacity: 0.9 !important;
       }
       
       .pc-user-info {
         flex-direction: column !important;
-        gap: 1rem !important;
-        padding: 1rem !important;
-        flex: 0.35 !important;
+        gap: 0.8rem !important;
+        padding: 0.8rem !important;
+        flex: none !important;
         background: rgba(255, 255, 255, 0.1) !important;
         border-radius: 12px !important;
       }
@@ -359,9 +359,7 @@
     @media screen and (max-width: 480px) {
       .pc-card-wrapper {
         width: 90vw !important;
-        height: auto !important;
-        min-height: 70vh !important;
-        max-height: 85vh !important;
+        height: 480px !important;
         max-width: 320px !important;
         top: 50% !important;
         left: 50% !important;
@@ -372,33 +370,35 @@
       }
       
       .pc-card {
-        min-height: 70vh !important;
-        max-height: 85vh !important;
-        height: auto !important;
+        height: 480px !important;
+        width: 100% !important;
         overflow: hidden !important;
         border-radius: 18px !important;
       }
       
       .pc-inside {
-        padding: 1.5rem 1.2rem !important;
-        gap: 1rem !important;
+        padding: 1.3rem 1rem !important;
+        gap: 0.7rem !important;
         height: 100% !important;
         justify-content: space-between !important;
         overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
       }
       
       .pc-avatar-content {
-        flex: 0.6 !important;
+        flex: none !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
+        margin-bottom: 0.8rem !important;
       }
       
       .avatar {
-        width: 100px !important;
-        height: 100px !important;
-        margin-bottom: 1rem !important;
+        width: 90px !important;
+        height: 90px !important;
+        margin-bottom: 0.8rem !important;
       }
       
       .pc-details {
@@ -407,23 +407,23 @@
       }
       
       .pc-details h3 {
-        font-size: 1.3rem !important;
-        margin-bottom: 0.3rem !important;
+        font-size: 1.25rem !important;
+        margin-bottom: 0.25rem !important;
         line-height: 1.1 !important;
         font-weight: 700 !important;
       }
       
       .pc-details p {
-        font-size: 0.95rem !important;
+        font-size: 0.9rem !important;
         line-height: 1.2 !important;
         opacity: 0.9 !important;
       }
       
       .pc-user-info {
         flex-direction: column !important;
-        gap: 0.8rem !important;
-        padding: 1rem !important;
-        flex: 0.4 !important;
+        gap: 0.7rem !important;
+        padding: 0.8rem !important;
+        flex: none !important;
         background: rgba(255, 255, 255, 0.1) !important;
         border-radius: 10px !important;
       }
@@ -485,16 +485,17 @@
       .pc-card-wrapper {
         width: 92vw !important;
         max-width: 300px !important;
-        min-height: 75vh !important;
+        height: 450px !important;
       }
       
       .pc-card {
-        min-height: 75vh !important;
+        height: 450px !important;
         border-radius: 16px !important;
       }
       
       .pc-inside {
-        padding: 1.3rem 1rem !important;
+        padding: 1.2rem 0.9rem !important;
+        gap: 0.6rem !important;
       }
       
       .avatar {
