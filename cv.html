@@ -1001,30 +1001,108 @@
       setTimeout(startIdleTilt, ANIMATION_CONFIG.INITIAL_DURATION + 200);
     });
 
-    // Device orientation for mobile tilt (optional)
-    function handleDeviceOrientation(event) {
-      const { beta, gamma } = event;
-      if (!beta || !gamma) return;
+    // تفعيل حركة النافذة حسب حركة الهاتف
+    let isDeviceOrientationEnabled = false;
+    let deviceOrientationActive = false;
 
-      updateCardTransform(
-        card.clientHeight / 2 + gamma * 5,
-        card.clientWidth / 2 + (beta - ANIMATION_CONFIG.DEVICE_BETA_OFFSET) * 5
-      );
+    function handleDeviceOrientation(event) {
+      if (!deviceOrientationActive || isPointerOver) return;
+      
+      const { beta, gamma } = event;
+      if (beta === null || gamma === null) return;
+
+      // تحسين الحساسية والنطاق
+      const sensitivity = 3;
+      const maxTilt = 30;
+      
+      // تقييد القيم لتجنب الحركة المفرطة
+      const clampedBeta = Math.max(-maxTilt, Math.min(maxTilt, beta));
+      const clampedGamma = Math.max(-maxTilt, Math.min(maxTilt, gamma));
+      
+      // تحويل زوايا الهاتف إلى إحداثيات النافذة
+      const centerX = card.clientWidth / 2;
+      const centerY = card.clientHeight / 2;
+      
+      const offsetX = centerX + (clampedGamma * sensitivity);
+      const offsetY = centerY + ((clampedBeta - 10) * sensitivity); // تعديل التوازن
+      
+      updateCardTransform(offsetX, offsetY);
     }
 
-    // Enable mobile tilt on HTTPS
-    card.addEventListener('click', function() {
-      if (location.protocol !== 'https:') return;
-      if (typeof DeviceMotionEvent.requestPermission === 'function') {
-        DeviceMotionEvent.requestPermission()
-          .then(state => {
-            if (state === 'granted') {
-              window.addEventListener('deviceorientation', handleDeviceOrientation);
-            }
-          })
-          .catch(err => console.error(err));
+    // دالة لطلب إذن استخدام حساسات الهاتف
+    async function requestDeviceOrientation() {
+      if (!window.DeviceOrientationEvent) {
+        console.log('Device orientation not supported');
+        return false;
+      }
+
+      // للمتصفحات الحديثة التي تحتاج إذن صريح
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        try {
+          const permission = await DeviceOrientationEvent.requestPermission();
+          if (permission === 'granted') {
+            enableDeviceOrientation();
+            return true;
+          } else {
+            console.log('Device orientation permission denied');
+            return false;
+          }
+        } catch (error) {
+          console.log('Error requesting device orientation permission:', error);
+          return false;
+        }
       } else {
+        // للمتصفحات التي لا تحتاج إذن صريح
+        enableDeviceOrientation();
+        return true;
+      }
+    }
+
+    function enableDeviceOrientation() {
+      if (!isDeviceOrientationEnabled) {
         window.addEventListener('deviceorientation', handleDeviceOrientation);
+        isDeviceOrientationEnabled = true;
+        deviceOrientationActive = true;
+        stopIdleTilt(); // إيقاف الحركة التلقائية
+        console.log('Device orientation enabled');
+      }
+    }
+
+    function disableDeviceOrientation() {
+      if (isDeviceOrientationEnabled) {
+        window.removeEventListener('deviceorientation', handleDeviceOrientation);
+        deviceOrientationActive = false;
+        startIdleTilt(); // استئناف الحركة التلقائية
+        console.log('Device orientation disabled');
+      }
+    }
+
+    // تشغيل/إيقاف حركة الهاتف عند النقر على النافذة في وضع الهاتف
+    card.addEventListener('click', function() {
+      // التحقق من وجود اتصال آمن (HTTPS)
+      if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
+        console.log('HTTPS required for device orientation');
+        return;
+      }
+
+      // التبديل بين تفعيل وإلغاء تفعيل حركة الهاتف
+      if (deviceOrientationActive) {
+        disableDeviceOrientation();
+      } else {
+        requestDeviceOrientation();
+      }
+    });
+
+    // تشغيل حركة الهاتف تلقائياً في الأجهزة المحمولة
+    window.addEventListener('load', function() {
+      // التحقق من وجود أجهزة الاستشعار
+      if (window.DeviceOrientationEvent && /Mobi|Android/i.test(navigator.userAgent)) {
+        // تأخير قصير للتأكد من تحميل الصفحة
+        setTimeout(() => {
+          if (window.location.protocol === 'https:' || window.location.hostname === 'localhost') {
+            requestDeviceOrientation();
+          }
+        }, 2000);
       }
     });
   </script>
