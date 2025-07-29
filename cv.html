@@ -1011,9 +1011,11 @@
       const { beta, gamma } = event;
       if (beta === null || gamma === null) return;
 
+      console.log('Device orientation:', { beta, gamma }); // للتأكد من أن الحدث يعمل
+
       // تحسين الحساسية والنطاق
-      const sensitivity = 3;
-      const maxTilt = 30;
+      const sensitivity = 4;
+      const maxTilt = 25;
       
       // تقييد القيم لتجنب الحركة المفرطة
       const clampedBeta = Math.max(-maxTilt, Math.min(maxTilt, beta));
@@ -1024,7 +1026,7 @@
       const centerY = card.clientHeight / 2;
       
       const offsetX = centerX + (clampedGamma * sensitivity);
-      const offsetY = centerY + ((clampedBeta - 10) * sensitivity); // تعديل التوازن
+      const offsetY = centerY + ((clampedBeta - 5) * sensitivity); // تعديل التوازن
       
       updateCardTransform(offsetX, offsetY);
     }
@@ -1079,16 +1081,23 @@
 
     // تشغيل/إيقاف حركة الهاتف عند النقر على النافذة في وضع الهاتف
     card.addEventListener('click', function() {
+      console.log('Card clicked');
+      console.log('Protocol:', window.location.protocol);
+      console.log('Device orientation supported:', !!window.DeviceOrientationEvent);
+      
       // التحقق من وجود اتصال آمن (HTTPS)
       if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost') {
         console.log('HTTPS required for device orientation');
+        alert('يجب استخدام HTTPS لتفعيل حركة الهاتف');
         return;
       }
 
       // التبديل بين تفعيل وإلغاء تفعيل حركة الهاتف
       if (deviceOrientationActive) {
         disableDeviceOrientation();
+        console.log('Device orientation disabled by click');
       } else {
+        console.log('Requesting device orientation permission...');
         requestDeviceOrientation();
       }
     });
