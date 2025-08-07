@@ -89,111 +89,154 @@
       position: relative;
       width: 100%;
       height: 100%;
-      background: linear-gradient(145deg, rgba(245, 245, 247, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+      background: linear-gradient(145deg, rgba(10, 20, 30, 0.95) 0%, rgba(20, 30, 45, 0.9) 100%), 
+                  url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300ff88' fill-opacity='0.05'%3E%3Cpath d='M10 20h40v20H10V20zm20-10h20v20H30V10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
       border-radius: calc(var(--card-radius) - 2px);
       margin: 2px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding: 0;
+      justify-content: space-between;
+      padding: 2rem;
       overflow: hidden;
     }
 
-    .pc-hero-image {
+    .pc-shine {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      opacity: var(--pointer-from-center);
+      transition: opacity 0.2s ease;
+    }
+
+    .pc-glare {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 280px;
-      border-radius: calc(var(--card-radius) - 2px) calc(var(--card-radius) - 2px) 0 0;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+      transform: translateX(calc(var(--pointer-x) - 50%)) translateY(calc(var(--pointer-y) - 50%));
+      opacity: var(--pointer-from-center);
+    }
+
+    .pc-avatar-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .avatar {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
       object-fit: cover;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      margin-bottom: 1.5rem;
+      filter: grayscale(100%);
     }
 
     .pc-content {
       position: relative;
       z-index: 2;
       width: 100%;
-      padding: 1.5rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
     }
 
-    .pc-profile-section {
-      text-align: left;
-      margin-bottom: 1.5rem;
+    .pc-details {
+      text-align: center;
+      margin-bottom: 2rem;
     }
 
-    .pc-profile-section h3 {
-      font-size: 1.8rem;
+    .pc-details h3 {
+      font-size: 2rem;
       font-weight: 700;
-      color: #1a1a1a;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .pc-verified-badge {
-      width: 20px;
-      height: 20px;
-      background: #10B981;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       color: white;
-      font-size: 12px;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
-    .pc-profile-section p {
-      font-size: 0.95rem;
-      color: rgba(26, 26, 26, 0.7);
+    .pc-details p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.7);
       font-weight: 400;
-      line-height: 1.4;
-      margin-bottom: 1rem;
     }
 
-    .pc-stats {
+    .pc-user-info {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 1rem;
       display: flex;
-      gap: 2rem;
-      margin-bottom: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .pc-stat {
+    .pc-user-details {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .pc-mini-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .pc-mini-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+    }
+
+    .pc-user-text {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      gap: 2px;
     }
 
-    .pc-stat-number {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #1a1a1a;
+    .pc-handle {
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 600;
     }
 
-    .pc-stat-label {
-      font-size: 0.85rem;
-      color: rgba(26, 26, 26, 0.6);
+    .pc-status {
+      color: #10B981;
+      font-size: 0.8rem;
       font-weight: 500;
     }
 
     .pc-contact-buttons {
       display: flex;
-      gap: 0.75rem;
-      width: 100%;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .pc-contact-btn {
       border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 24px;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       cursor: pointer;
       transition: all 0.2s ease;
+      backdrop-filter: blur(10px);
       flex: 1;
-      text-align: center;
+      min-width: 70px;
     }
 
     .pc-contact-btn.whatsapp {
@@ -221,8 +264,8 @@
     /* Mobile First Approach */
     @media screen and (max-width: 768px) {
       .pc-card-wrapper {
-        width: 300px !important;
-        height: 430px !important;
+        width: 270px !important;
+        height: 380px !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
@@ -232,8 +275,8 @@
       }
       
       .pc-card {
-        height: 430px !important;
-        width: 300px !important;
+        height: 380px !important;
+        width: 270px !important;
         overflow: hidden !important;
         border-radius: 20px !important;
       }
@@ -756,31 +799,34 @@
   <div class="pc-card-wrapper" id="wrap">
     <section class="pc-card" id="card">
       <div class="pc-inside">
-        <img class="pc-hero-image" src="achraf-profile copy.jpg" alt="Achraf Ramdani" loading="lazy" />
+        <div class="pc-shine"></div>
+        <div class="pc-glare"></div>
+        
+        <div class="pc-avatar-content">
+          <img class="avatar" src="achraf-profile copy.jpg" alt="Profile" loading="lazy" style="filter: grayscale(1);" />
+        </div>
         
         <div class="pc-content">
-          <div class="pc-profile-section">
-            <h3>
-              Achraf Ramdani
-              <div class="pc-verified-badge">✓</div>
-            </h3>
-            <p>Développeur Full Stack passionné par la programmation web, spécialisé dans les technologies backend et frontend avec une expertise en DevOps.</p>
+          <div class="pc-details">
+            <h3>Achraf Ramdani</h3>
+            <p>Développeur Full Stack</p>
           </div>
           
-          <div class="pc-stats">
-            <div class="pc-stat">
-              <div class="pc-stat-number">58</div>
-              <div class="pc-stat-label">Projets</div>
+          <div class="pc-user-info">
+            <div class="pc-user-details">
+              <div class="pc-mini-avatar">
+                <img src="achraf-profile copy.jpg" alt="Profile" loading="lazy" style="width: 40px; height: 40px; border-radius: 50%; filter: grayscale(1);" />
+              </div>
+              <div class="pc-user-text">
+                <div class="pc-handle">@ram_achraf</div>
+                <div class="pc-status">En ligne</div>
+              </div>
             </div>
-            <div class="pc-stat">
-              <div class="pc-stat-number">142</div>
-              <div class="pc-stat-label">Commits</div>
+            
+            <div class="pc-contact-buttons">
+              <button class="pc-contact-btn whatsapp" id="whatsappBtn" type="button">WhatsApp</button>
+              <button class="pc-contact-btn email" id="emailBtn" type="button">Email</button>
             </div>
-          </div>
-          
-          <div class="pc-contact-buttons">
-            <button class="pc-contact-btn whatsapp" id="whatsappBtn" type="button">WhatsApp</button>
-            <button class="pc-contact-btn email" id="emailBtn" type="button">Email</button>
           </div>
         </div>
       </div>
